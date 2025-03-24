@@ -1,0 +1,13 @@
+../X-CUBE-AI/App/predictive_maintenance_model.c:362:9:predictive_maintenance_model_configure_activations	16	static
+../X-CUBE-AI/App/predictive_maintenance_model.c:395:9:predictive_maintenance_model_configure_weights	16	static
+../X-CUBE-AI/App/predictive_maintenance_model.c:434:9:ai_predictive_maintenance_model_get_info	160	static
+../X-CUBE-AI/App/predictive_maintenance_model.c:481:9:ai_predictive_maintenance_model_get_report	160	static
+../X-CUBE-AI/App/predictive_maintenance_model.c:528:10:ai_predictive_maintenance_model_get_error	16	static
+../X-CUBE-AI/App/predictive_maintenance_model.c:535:10:ai_predictive_maintenance_model_create	24	static
+../X-CUBE-AI/App/predictive_maintenance_model.c:546:10:ai_predictive_maintenance_model_create_and_init	88	static
+../X-CUBE-AI/App/predictive_maintenance_model.c:581:12:ai_predictive_maintenance_model_inputs_get	16	static
+../X-CUBE-AI/App/predictive_maintenance_model.c:592:12:ai_predictive_maintenance_model_outputs_get	16	static
+../X-CUBE-AI/App/predictive_maintenance_model.c:603:11:ai_predictive_maintenance_model_destroy	16	static
+../X-CUBE-AI/App/predictive_maintenance_model.c:610:9:ai_predictive_maintenance_model_init	24	static
+../X-CUBE-AI/App/predictive_maintenance_model.c:627:8:ai_predictive_maintenance_model_run	24	static
+../X-CUBE-AI/App/predictive_maintenance_model.c:635:8:ai_predictive_maintenance_model_forward	16	static
