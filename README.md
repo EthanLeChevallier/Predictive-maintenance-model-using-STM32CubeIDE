@@ -146,13 +146,86 @@ Malgré ces bons résultats, nous restons prudents :
 L’ensemble des outils d’évaluation utilisés nous permet de conclure que notre modèle est suffisamment fiable pour un déploiement embarqué sur STM32.
 
 
-## 📊 Étape 5 : Inférence embarquée & test
-Le fichier Python `Send_data_stm32.py` pilote la communication :
-- Envoie des vecteurs normalisés à la carte
-- Lit les 6 scores softmax en retour
-- Affiche la classe prédite
+## 🏹 Étape 5 – Déploiement sur la carte STM32
 
-Une fonction d’évaluation compare (si disponible) la sortie STM32 à la vérité terrain. Si non, elle affiche simplement les prédictions STM32 pour une inspection manuelle.
+Le modèle entraîné a été exporté dans un premier temps au format `.h5`, mais cette approche a posé des problèmes de compatibilité lors de la conversion avec STM32Cube.AI. Nous avons donc choisi d’utiliser le format **TensorFlow Lite (`.tflite`)**, plus stable dans notre contexte. Le fichier `.tflite` a été généré et stocké sur Google Drive avant importation dans CubeMX.
+
+### 5.1 Conversion avec STM32Cube.AI
+
+La démarche suivie pour intégrer le modèle sur la carte STM32 s’inspire étroitement de l’exemple **MNIST** présenté dans le cours (cf. EmbeddedAI.pdf). Nous avons utilisé l’outil **STM32Cube.AI** intégré à **STM32CubeMX** pour :
+- Importer le modèle `.tflite`
+- Générer le code embarqué compatible avec la série **STM32L4**
+- Configurer les buffers d’entrée/sortie et la mémoire optimisée (float, RAM ≤ 3KB, Flash ≤ 25KB)
+
+Le modèle a été validé localement à l’aide de l’outil `stedgeai.exe validate`, qui a confirmé sa légèreté (13KB de poids, 768B d'activations). La structure du réseau est composée de 3 couches denses.
+
+### 5.2 Modifications du code embarqué
+
+Une fois le projet généré dans **STM32CubeIDE**, nous avons modifié manuellement le fichier `app_x-cube-ai.c` pour y intégrer :
+- Une fonction `acquire_and_process_data()` pour recevoir les données d’entrée via **UART** en format `float32`
+- Une fonction `post_process()` qui reconstruit les résultats (`softmax`) en `uint8`, puis les renvoie au PC
+- Une fonction de synchronisation UART (`synchronize_UART`) pour initialiser la communication
+
+La boucle principale `MX_X_CUBE_AI_Process()` suit la structure classique :
+1. Acquisition des données via UART
+2. Inférence avec `ai_run()`
+3. Transmission des résultats au PC via UART
+
+### 5.3 Communication avec le PC (UART)
+
+La communication est gérée par le script Python `Send_data_stm32.py`, qui utilise le port COM4 (UART) à 115200 bauds. Le protocole fonctionne ainsi :
+- Génération de données de test simulées avec `generate_random_data()`
+- Normalisation des données avec `StandardScaler`
+- Envoi des vecteurs de 7 floats via UART
+- Réception d’un tableau de 6 valeurs (scores softmax compressés entre 0 et 255)
+
+Le script évalue ensuite la précision STM32 en comparant la classe prédite à un `y_test` aléatoire.
+
+### 5.4 Résultats embarqués
+
+D’après le fichier `resultat.txt.txt`, la prédiction embarquée est fonctionnelle :
+- Les vecteurs sont bien transmis et reçus
+- Le STM32 renvoie des valeurs cohérentes de softmax
+- La précision augmente itérativement jusqu’à atteindre **1.00** sur 100 itérations de test
+
+Les sorties telles que `b'\x00\x00\x00\x00\xff\x00'` sont bien décodées en scores `[0.0, 0.0, 0.0, 0.0, 1.0, 0.0]`, correspondant à des classes valides.
+
+![resultat_test](https://github.com/user-attachments/assets/c68c72c6-4ada-4751-9aab-38605d247493)
+
+Le modèle embarqué montre ainsi une inférence rapide, fiable, et efficace, parfaitement adaptée à un microcontrôleur STM32L4R9.
+
+## 🔜 Étape 6 – Limites et perspectives
+
+### 6.1 Limites identifiées
+
+Malgré le bon fonctionnement général du projet, certaines limites doivent être soulignées :
+
+- **Répartition artificielle des classes** : le jeu de données a été rééquilibré artificiellement avec SMOTE, ce qui pourrait induire un certain optimisme sur les performances.
+- **Pas de données réelles** : les tests se basent sur des données simulées ou générées aléatoirement. Cela ne reflète pas les conditions de production industrielle.
+- **Absence de validation croisée** : l'évaluation repose sur un simple split train/test, sans validation croisée.
+- **Communication UART simplifiée** : le protocole UART utilisé est simple mais sensible à des pertes ou désynchronisations si non encadré.
+
+### 6.2 Améliorations envisagées
+
+Pour améliorer la robustesse et la portée du projet, plusieurs pistes sont possibles :
+
+- **Tester le modèle avec des données réelles** issues de machines ou de capteurs industriels.
+- **Utiliser d'autres techniques de rééquilibrage** (class weighting, undersampling combiné).
+- **Passer à une classification multi-label** si plusieurs pannes peuvent coexister (avec une autre architecture).
+- **Intégrer un système de journalisation côté STM32**, avec sauvegarde en mémoire Flash ou envoi périodique vers le PC.
+- **Mesurer le temps d'inférence embarqué** pour évaluer l'efficacité du modèle sur STM32.
+
+Ces perspectives permettent de prolonger le projet vers une version plus industrialisable ou intégrée dans un pipeline de maintenance prédictive en environnement embarqué réel.
+
+## ✅ Conclusion générale
+
+Ce projet a permis de mettre en œuvre l’ensemble de la chaîne de développement d’un système d’intelligence artificielle embarqué, depuis l’analyse exploratoire des données jusqu’au déploiement effectif sur une carte STM32.
+
+Nous avons dû faire face à des contraintes concrètes : déséquilibre des classes, limitations matérielles, conversion du modèle, communication série. Chacune a été traitée par des choix techniques appropriés, justifiés par les contraintes du déploiement embarqué.
+
+Le modèle entraîné est léger, précis, et opérationnel sur STM32. La démonstration de bout en bout valide la faisabilité d’intégrer un algorithme de classification complexe dans un microcontrôleur à ressources limitées.
+
+Ce projet constitue une base solide pour des applications réelles de maintenance prédictive dans un environnement industriel connecté (IIoT).
 
 ## 💧 Comment exécuter le projet
 
@@ -160,33 +233,25 @@ Une fonction d’évaluation compare (si disponible) la sortie STM32 à la véri
 ```bash
 python Send_data_stm32.py
 ```
-> Assurez-vous que la carte est branchée, le port correct dans `PORT = "COMx"`.
+> Assurez-vous que la carte STM32 est bien connectée, et que le port série dans le script (`PORT = "COMx"`) correspond au bon port COM. Le script envoie des vecteurs de données simulées normalisées, puis reçoit la prédiction de la carte au format compressé (softmax codé sur 8 bits).
 
-### Partie Colab (entraînement)
-Lancez le notebook `predictive_maintenance_model.ipynb` sur Google Colab ou localement avec Jupyter.
+### Partie Google Colab / Jupyter (entraînement du modèle)
+Ouvrir le notebook `predictive_maintenance_model.ipynb` sur Google Colab ou localement avec Jupyter Notebook pour :
+- Charger et préparer le jeu de données
+- Appliquer le rééquilibrage
+- Entraîner le modèle
+- Évaluer sa performance
+- Sauvegarder le modèle au format `.tflite` pour déploiement
+
+---
 
 ## 📁 Organisation des fichiers
 
 | Fichier | Rôle |
 |--------|------|
-| `predictive_maintenance_model.ipynb` | Prétraitement, entraînement, évaluation du modèle |
-| `Send_data_stm32.py` | Communication UART avec la carte STM32 |
-| `model.h5` | Modèle entraîné prêt à être importé dans STM32CubeAI |
-| `README.md` | Rapport complet du projet |
-| `TP_AI4I2020.ipynb` | Version initiale / alternative du traitement |
-| `ai4i2020.csv` | Dataset de maintenance prédictive |
-
-## 📊 Résultats obtenus
-- Le modèle embarqué est capable de prédire en temps réel le type de panne
-- La latence d’inférence est très faible (quelques ms)
-- La communication UART est fiable, avec prédictions correctes
-- Le modèle est suffisamment léger pour une exécution fluide sur STM32L4R9
-
-## ✅ Conclusion
-Ce projet couvre l’ensemble du cycle :
-- De l’analyse de données jusqu’au déploiement embarqué
-- Avec une architecture optimisée pour les contraintes d’un microcontrôleur
-- Et une précision satisfaisante sur des données industrielles simulées
-
-Il reflète une **intégration complète de l’IA embarquée sur STM32**.
-
+| `predictive_maintenance_model.ipynb` | Prétraitement, entraînement et évaluation du modèle |
+| `Send_data_stm32.py` | Script de communication UART entre le PC et la carte STM32 |
+| `model.tflite` | Modèle entraîné et converti, prêt pour STM32Cube.AI |
+| `TP_AI4I2020.ipynb` | Version initiale / exploration préliminaire du dataset |
+| `ai4i2020.csv` | Jeu de données original utilisé pour l'entraînement |
+| `README.md` | Rapport de projet détaillé et instructions d'exécution |
