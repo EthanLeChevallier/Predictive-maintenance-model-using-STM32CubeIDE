@@ -245,13 +245,14 @@ Ouvrir le notebook `predictive_maintenance_model.ipynb` sur Google Colab ou loca
 
 ---
 
-## 📁 Organisation des fichiers
+# 📁 Organisation des fichiers
 
 | Fichier | Rôle |
 |--------|------|
 | `predictive_maintenance_model.ipynb` | Prétraitement, entraînement et évaluation du modèle |
 | `Send_data_stm32.py` | Script de communication UART entre le PC et la carte STM32 |
 | `model.tflite` | Modèle entraîné et converti, prêt pour STM32Cube.AI |
+| `app_x-cube-ai.c` | Code C généré et modifié pour exécuter le modèle sur STM32 avec communication UART |
 | `TP_AI4I2020.ipynb` | Version initiale / exploration préliminaire du dataset |
 | `ai4i2020.csv` | Jeu de données original utilisé pour l'entraînement |
 | `README.md` | Rapport de projet détaillé et instructions d'exécution |
