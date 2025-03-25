@@ -1,0 +1,501 @@
+----- Itération 1 -----
+Sortie brute lue : b'\xff\x00\x00\x00\xff\x00'
+Sortie reçue : [1.0, 0.0, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.01
+
+----- Itération 2 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.02
+
+----- Itération 3 -----
+Sortie brute lue : b'\n\x00\x00\x00\xf47'
+Sortie reçue : [0.0392156862745098, 0.0, 0.0, 0.0, 0.9568627450980393, 0.21568627450980393]
+----------------------- Précision : 0.03
+
+----- Itération 4 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xfe\x1c'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 0.996078431372549, 0.10980392156862745]
+----------------------- Précision : 0.04
+
+----- Itération 5 -----
+Sortie brute lue : b'\x00\x00\n\x00\xf4\x00'
+Sortie reçue : [0.0, 0.0, 0.0392156862745098, 0.0, 0.9568627450980393, 0.0]
+----------------------- Précision : 0.05
+
+----- Itération 6 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\xde'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.8705882352941177]
+----------------------- Précision : 0.06
+
+----- Itération 7 -----
+Sortie brute lue : b'E\x00\x00\x00\xb9y'
+Sortie reçue : [0.27058823529411763, 0.0, 0.0, 0.0, 0.7254901960784313, 0.4745098039215686]
+----------------------- Précision : 0.07
+
+----- Itération 8 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.08
+
+----- Itération 9 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.09
+
+----- Itération 10 -----
+Sortie brute lue : b'S\x00\x00\x00\xab\x00'
+Sortie reçue : [0.3254901960784314, 0.0, 0.0, 0.0, 0.6705882352941176, 0.0]
+----------------------- Précision : 0.10
+
+----- Itération 11 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xfe\x93'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 0.996078431372549, 0.5764705882352941]
+----------------------- Précision : 0.11
+
+----- Itération 12 -----
+Sortie brute lue : b'\x00\x00\xff\x00\x00\x00'
+Sortie reçue : [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.12
+
+----- Itération 13 -----
+Sortie brute lue : b'\x00\x00\x00\xfe\x00\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.996078431372549, 0.0, 0.0]
+----------------------- Précision : 0.13
+
+----- Itération 14 -----
+Sortie brute lue : b'\x00\x00\xfe\x00\x00\x00'
+Sortie reçue : [0.0, 0.0, 0.996078431372549, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.14
+
+----- Itération 15 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xffU'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.3333333333333333]
+----------------------- Précision : 0.15
+
+----- Itération 16 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.16
+
+----- Itération 17 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xffa'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.3803921568627451]
+----------------------- Précision : 0.17
+
+----- Itération 18 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xfe\xca'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 0.996078431372549, 0.792156862745098]
+----------------------- Précision : 0.18
+
+----- Itération 19 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.19
+
+----- Itération 20 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x96'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.5882352941176471]
+----------------------- Précision : 0.20
+
+----- Itération 21 -----
+Sortie brute lue : b'\x00\x00\xfe\x00\x00\x00'
+Sortie reçue : [0.0, 0.0, 0.996078431372549, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.21
+
+----- Itération 22 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.22
+
+----- Itération 23 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\xc7'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.7803921568627451]
+----------------------- Précision : 0.23
+
+----- Itération 24 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\xb4'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.7058823529411765]
+----------------------- Précision : 0.24
+
+----- Itération 25 -----
+Sortie brute lue : b'\x00\x00\xff\x00\x00\x00'
+Sortie reçue : [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.25
+
+----- Itération 26 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.26
+
+----- Itération 27 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.27
+
+----- Itération 28 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.28
+
+----- Itération 29 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff;'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.23137254901960785]
+----------------------- Précision : 0.29
+
+----- Itération 30 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.30
+
+----- Itération 31 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\xd8'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.8470588235294118]
+----------------------- Précision : 0.31
+
+----- Itération 32 -----
+Sortie brute lue : b'\xfe\x00\x00\x00\x00+'
+Sortie reçue : [0.996078431372549, 0.0, 0.0, 0.0, 0.0, 0.16862745098039217]
+----------------------- Précision : 0.32
+
+----- Itération 33 -----
+Sortie brute lue : b'\x00\x00A\x00\xbd\x00'
+Sortie reçue : [0.0, 0.0, 0.2549019607843137, 0.0, 0.7411764705882353, 0.0]
+----------------------- Précision : 0.33
+
+----- Itération 34 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\xe8'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.9098039215686274]
+----------------------- Précision : 0.34
+
+----- Itération 35 -----
+Sortie brute lue : b'\x00\x00\xfb\x00\x03\xcb'
+Sortie reçue : [0.0, 0.0, 0.984313725490196, 0.0, 0.011764705882352941, 0.796078431372549]
+----------------------- Précision : 0.35
+
+----- Itération 36 -----
+Sortie brute lue : b'\x00\x00\xff\x00\x00\x00'
+Sortie reçue : [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.36
+
+----- Itération 37 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xffr'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.4470588235294118]
+----------------------- Précision : 0.37
+
+----- Itération 38 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.38
+
+----- Itération 39 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.39
+
+----- Itération 40 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff@'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.25098039215686274]
+----------------------- Précision : 0.40
+
+----- Itération 41 -----
+Sortie brute lue : b'\x00\x00\xff\x00\x00\x00'
+Sortie reçue : [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.41
+
+----- Itération 42 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.42
+
+----- Itération 43 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.43
+
+----- Itération 44 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xfff'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.4]
+----------------------- Précision : 0.44
+
+----- Itération 45 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xfe\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 0.996078431372549, 0.0]
+----------------------- Précision : 0.45
+
+----- Itération 46 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.46
+
+----- Itération 47 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xffy'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.4745098039215686]
+----------------------- Précision : 0.47
+
+----- Itération 48 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xfe\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 0.996078431372549, 0.0]
+----------------------- Précision : 0.48
+
+----- Itération 49 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.49
+
+----- Itération 50 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xfe\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 0.996078431372549, 0.0]
+----------------------- Précision : 0.50
+
+----- Itération 51 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.51
+
+----- Itération 52 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\xb7'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.7176470588235294]
+----------------------- Précision : 0.52
+
+----- Itération 53 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x84'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.5176470588235295]
+----------------------- Précision : 0.53
+
+----- Itération 54 -----
+Sortie brute lue : b'\x00\x00\xff\x00\x00\x00'
+Sortie reçue : [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.54
+
+----- Itération 55 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.55
+
+----- Itération 56 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.56
+
+----- Itération 57 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.57
+
+----- Itération 58 -----
+Sortie brute lue : b'\x00\x00\xfe\x00\x00\x00'
+Sortie reçue : [0.0, 0.0, 0.996078431372549, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.58
+
+----- Itération 59 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.59
+
+----- Itération 60 -----
+Sortie brute lue : b'\x00\x00\xbd\x00A\x00'
+Sortie reçue : [0.0, 0.0, 0.7411764705882353, 0.0, 0.2549019607843137, 0.0]
+----------------------- Précision : 0.60
+
+----- Itération 61 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.61
+
+----- Itération 62 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.62
+
+----- Itération 63 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.63
+
+----- Itération 64 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x97'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.592156862745098]
+----------------------- Précision : 0.64
+
+----- Itération 65 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.65
+
+----- Itération 66 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.66
+
+----- Itération 67 -----
+Sortie brute lue : b'\x00\x00\xfc\x00\x02\x00'
+Sortie reçue : [0.0, 0.0, 0.9882352941176471, 0.0, 0.00784313725490196, 0.0]
+----------------------- Précision : 0.67
+
+----- Itération 68 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x15'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.08235294117647059]
+----------------------- Précision : 0.68
+
+----- Itération 69 -----
+Sortie brute lue : b'\x00\x00\xff\x00\x00\x00'
+Sortie reçue : [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.69
+
+----- Itération 70 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.70
+
+----- Itération 71 -----
+Sortie brute lue : b'\x00\x00\xff\x00\x00\xf3'
+Sortie reçue : [0.0, 0.0, 1.0, 0.0, 0.0, 0.9529411764705882]
+----------------------- Précision : 0.71
+
+----- Itération 72 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff_'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.37254901960784315]
+----------------------- Précision : 0.72
+
+----- Itération 73 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\xe8'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.9098039215686274]
+----------------------- Précision : 0.73
+
+----- Itération 74 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xfek'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 0.996078431372549, 0.4196078431372549]
+----------------------- Précision : 0.74
+
+----- Itération 75 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.75
+
+----- Itération 76 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xfe\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 0.996078431372549, 0.0]
+----------------------- Précision : 0.76
+
+----- Itération 77 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xfe\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 0.996078431372549, 0.0]
+----------------------- Précision : 0.77
+
+----- Itération 78 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.78
+
+----- Itération 79 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xffj'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.41568627450980394]
+----------------------- Précision : 0.79
+
+----- Itération 80 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.80
+
+----- Itération 81 -----
+Sortie brute lue : b'\x00\x00\xfe\x00\x00\x00'
+Sortie reçue : [0.0, 0.0, 0.996078431372549, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.81
+
+----- Itération 82 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x91'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.5686274509803921]
+----------------------- Précision : 0.82
+
+----- Itération 83 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.83
+
+----- Itération 84 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.84
+
+----- Itération 85 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.85
+
+----- Itération 86 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.86
+
+----- Itération 87 -----
+Sortie brute lue : b'\xff\x00\x00\x00\x00o'
+Sortie reçue : [1.0, 0.0, 0.0, 0.0, 0.0, 0.43529411764705883]
+----------------------- Précision : 0.87
+
+----- Itération 88 -----
+Sortie brute lue : b'\x00\x00\xff\x00\x00\x00'
+Sortie reçue : [0.0, 0.0, 1.0, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.88
+
+----- Itération 89 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.89
+
+----- Itération 90 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.90
+
+----- Itération 91 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\xe4'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.8941176470588236]
+----------------------- Précision : 0.91
+
+----- Itération 92 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xfe\xb4'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 0.996078431372549, 0.7058823529411765]
+----------------------- Précision : 0.92
+
+----- Itération 93 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.93
+
+----- Itération 94 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.94
+
+----- Itération 95 -----
+Sortie brute lue : b'\x00\x00\xc0\x00>\x00'
+Sortie reçue : [0.0, 0.0, 0.7529411764705882, 0.0, 0.24313725490196078, 0.0]
+----------------------- Précision : 0.95
+
+----- Itération 96 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+----------------------- Précision : 0.96
+
+----- Itération 97 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xfe\x00'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 0.996078431372549, 0.0]
+----------------------- Précision : 0.97
+
+----- Itération 98 -----
+Sortie brute lue : b'\x00\x00\xfe\x00\x00\x00'
+Sortie reçue : [0.0, 0.0, 0.996078431372549, 0.0, 0.0, 0.0]
+----------------------- Précision : 0.98
+
+----- Itération 99 -----
+Sortie brute lue : b'\x00\x00\x00\x00\xff\x99'
+Sortie reçue : [0.0, 0.0, 0.0, 0.0, 1.0, 0.6]
+----------------------- Précision : 0.99
+
+----- Itération 100 -----
+Sortie brute lue : b'\x00\x00\xf5\x00\t\x10'
+Sortie reçue : [0.0, 0.0, 0.9607843137254902, 0.0, 0.03529411764705882, 0.06274509803921569]
+----------------------- Précision : 1.00
+
+Précision sur STM32 : 1.00
