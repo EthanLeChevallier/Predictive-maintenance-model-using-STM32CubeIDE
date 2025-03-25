@@ -63,7 +63,7 @@ Nous avons initialement envisagé une approche **multi-label**, dans laquelle le
 
 Dans le contexte d’un projet embarqué sur STM32, cela aurait considérablement complexifié le déploiement et la vérification des résultats. Nous avons donc opté pour une classification **multi-classes classique**, plus simple, plus robuste, et surtout **mieux adaptée aux contraintes d’un microcontrôleur**.
 
-## 🔍 Étape 2 – Choix du modèle et architecture
+## 🌲 Étape 2 – Choix du modèle et architecture
 
 ### 2.1 Choix du type de modèle : réseau de neurones (MLP)
 Nous avons choisi d’utiliser un **réseau de neurones dense (MLP)** plutôt qu’un algorithme de type Random Forest, SVM ou arbre de décision pour plusieurs raisons :
@@ -99,18 +99,52 @@ L’architecture a été choisie pour être **légère, compacte et embarquable*
 - Un nombre de paramètres maîtrisé (< 20 000)
 - Un seul passage avant prédiction (`feed-forward`) sans complexité algorithmique
 
-## 📉 Étape 3 : Évaluation du modèle
-- **Accuracy > 99%**, mais ajustée avec des métriques comme le **recall** par classe.
-- Une **matrice de confusion complète 6×6** est générée dans le Colab.
-- Chaque classe est correctement identifiée grâce à la correction du déséquilibre et du one-hot encoding.
+## ⚖️ Étape 3 – Rééquilibrage du dataset
 
-## 🚀 Étape 4 : Déploiement sur STM32
-Le modèle est exporté au format `tflite` (problème de compatibilité avec h5) et importé dans **STM32Cube.AI** via CubeMX :
-- Le réseau est converti automatiquement en code C optimisé
-- L'inférence est intégrée dans un projet STM32CubeIDE (carte STM32L4R9)
-- La communication UART permet d’envoyer les features et de recevoir la prédiction
+Afin de pallier le fort déséquilibre entre les classes (notamment l’écrasante majorité de "No Failure"), nous avons choisi d’appliquer une stratégie de **rééquilibrage par oversampling**, en utilisant **SMOTE** (Synthetic Minority Over-sampling Technique).
 
-Cette étape suit une démarche identique à celle de l'exemple MNIST sur STM32 vu précédemment en cours.
+SMOTE permet de générer artificiellement de nouveaux exemples pour les classes minoritaires, en interpolant des points synthétiques proches d’échantillons existants. Cette méthode a l’avantage de **ne pas supprimer d’échantillons** (contrairement à l’undersampling), et donc de **préserver toute l’information disponible** dans le dataset initial.
+
+Nous avons fait le choix d’utiliser uniquement SMOTE, sans tester d’autres alternatives comme les poids de classes ou le RandomUnderSampler. Bien que cela aurait pu être pertinent pour comparaison, notre priorité était d’obtenir rapidement un jeu de données équilibré pour valider l’apprentissage embarqué.
+
+### Application dans le pipeline
+D’après l’analyse du code, le rééquilibrage par SMOTE est effectué **avant le split train/test**, ce qui peut introduire un risque de **data leakage** (les points synthétiques pouvant influencer les deux ensembles).
+
+Une amélioration possible serait d’appliquer SMOTE **uniquement sur l’ensemble d’entraînement** après découpage, afin de préserver l’indépendance de la phase de test. Cela n’a toutefois pas semblé altérer la qualité des résultats dans notre cas, comme en témoigne la bonne généralisation observée sur les prédictions STM32.
+
+## 🎯 Étape 4 – Évaluation du modèle
+
+L’évaluation de notre modèle ne s’est pas limitée à une simple mesure d’accuracy. Nous avons mis en place un protocole plus complet, fondé sur des outils d’analyse fine de la performance :
+
+### 4.1 Métriques utilisées
+
+Nous avons utilisé les métriques classiques mais essentielles pour un problème de classification multi-classes :
+- **Accuracy globale** : utile pour donner une idée générale des performances
+- **Rapport de classification** : incluant `precision`, `recall` et `f1-score` pour chaque classe
+- **Matrice de confusion** : pour visualiser les erreurs de prédiction classe par classe
+
+Ces indicateurs permettent non seulement de juger la qualité globale du modèle, mais aussi de vérifier s’il n’est pas biaisé contre les classes minoritaires comme `RNF`.
+
+### 4.2 Outils de visualisation
+
+Pour renforcer l’analyse, nous avons tracé l’évolution de la **loss et de l’accuracy** en fonction des epochs sur les ensembles d’entraînement et de validation. Ces courbes nous ont permis de confirmer l’absence d’overfitting visible et la bonne généralisation du modèle.
+
+### 4.3 Résultats observés
+
+Le modèle atteint une précision globale supérieure à **99%**, y compris sur l’ensemble de test. La matrice de confusion montre que :
+- Les classes majoritaires comme `No Failure` ou `TWF` sont parfaitement prédites
+- Les classes plus rares comme `RNF` ou `OSF` sont également bien identifiées, ce qui montre l’efficacité du rééquilibrage par SMOTE
+
+Le rapport de classification confirme une bonne homogénéité des scores f1, avec un macro-average et un weighted-average très élevés (proches de 0.99).
+
+### 4.4 Limites et interprétation
+
+Malgré ces bons résultats, nous restons prudents :
+- Le split train/test après SMOTE aurait pu influencer les scores positivement
+- Les résultats sont obtenus sur un jeu synthétique ; une validation sur des données réelles serait nécessaire pour garantir la robustesse du modèle
+
+L’ensemble des outils d’évaluation utilisés nous permet de conclure que notre modèle est suffisamment fiable pour un déploiement embarqué sur STM32.
+
 
 ## 📊 Étape 5 : Inférence embarquée & test
 Le fichier Python `Send_data_stm32.py` pilote la communication :
