@@ -1,0 +1,42 @@
+
+
+Starting AI validation on desktop with random data...
+  
+C:/Users/ethan/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.0.0/Utilities/windows/stedgeai.exe validate --target stm32l4 --name predictive_maintenance_model -m C:/Users/ethan/Downloads/predictive_maintenance_model.tflite --compression low --verbosity 1 --workspace C:/Users/ethan/AppData/Local/Temp/mxAI_workspace16500065570490014100047517161495466 --output C:/Users/ethan/.stm32cubemx/predictive_maintenance_model_output 
+ST Edge AI Core v2.0.0-20049 
+Setting validation data... 
+ generating random data, size=10, seed=42, range=(0, 1) 
+   I[1]: (10, 1, 1, 7)/float32, min/max=[0.020584, 0.986887], mean/std=[0.467482, 0.301774] 
+ no output/reference samples are provided 
+Creating c (debug) info json file C:\Users\ethan\AppData\Local\Temp\mxAI_workspace16500065570490014100047517161495466\predictive_maintenance_model_c_info.json 
+Copying the AI runtime files to the user workspace: C:\Users\ethan\AppData\Local\Temp\mxAI_workspace16500065570490014100047517161495466\inspector_predictive_maintenance_model\workspace 
+ from: C:\Users\ethan\STM32Cube\Repository\Packs\STMicroelectronics\X-CUBE-AI\10.0.0\Utilities\windows\targets\common\EmbedNets\tools\inspector\workspace 
+  
+ Exec/report summary (validate) 
+ ------------------------------------------------------------------------------------------------------------- 
+ model file         :   C:\Users\ethan\Downloads\predictive_maintenance_model.tflite                           
+ type               :   tflite                                                                                 
+ c_name             :   predictive_maintenance_model                                                           
+ compression        :   low                                                                                    
+ options            :   allocate-inputs, allocate-outputs                                                      
+ optimization       :   balanced                                                                               
+ target/series      :   stm32l4                                                                                
+ workspace dir      :   C:\Users\ethan\AppData\Local\Temp\mxAI_workspace16500065570490014100047517161495466    
+ output dir         :   C:\Users\ethan\.stm32cubemx\predictive_maintenance_model_output                        
+ model_fmt          :   float                                                                                  
+ model_name         :   predictive_maintenance_model                                                           
+ model_hash         :   0xe0f7a2730ad2163e34cb62e047d7b4a0                                                     
+ params #           :   9,605 items (13.52 KiB)                                                                
+ ------------------------------------------------------------------------------------------------------------- 
+ input 1/1          :   'serving_default_input_layer0', f32(1x7), 28 Bytes, activations                        
+ output 1/1         :   'nl_3', f32(1x5), 20 Bytes, activations                                                
+ macc               :   9,872                                                                                  
+ weights (ro)       :   13,204 B (12.89 KiB) (1 segment) / -25,216(-65.6%) vs float model                      
+ activations (rw)   :   768 B (768 B) (1 segment) *                                                            
+ ram (total)        :   768 B (768 B) = 768 + 0 + 0                                                            
+ ------------------------------------------------------------------------------------------------------------- 
+ (*) 'input'/'output' buffers can be used from the activations buffer 
+Running the TFlite model... 
+TOOL ERROR: Didn't find op for builtin opcode 'FULLY_CONNECTED' version '12'. An older version of this builtin might be supported. Are you using an old TFLite binary with a newer model? 
+Registration failed. 
+Validation ended

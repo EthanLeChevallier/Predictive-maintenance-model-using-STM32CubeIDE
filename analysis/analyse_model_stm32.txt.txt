@@ -1,0 +1,129 @@
+
+Analyzing model 
+CUsersethanSTM32CubeRepositoryPacksSTMicroelectronicsX-CUBE-AI10.0.0Utilitieswindowsstedgeai.exe analyze --target stm32l4 --name predictive_maintenance_model -m CUsersethanDownloadspredictive_maintenance_model.tflite --compression low --verbosity 1 --workspace CUsersethanAppDataLocalTempmxAI_workspace16471954790290015863349125137944536 --output CUsersethan.stm32cubemxpredictive_maintenance_model_output 
+ST Edge AI Core v2.0.0-20049 
+Creating c (debug) info json file CUsersethanAppDataLocalTempmxAI_workspace16471954790290015863349125137944536predictive_maintenance_model_c_info.json 
+  
+ Execreport summary (analyze) 
+ ------------------------------------------------------------------------------------------------------------- 
+ model file            CUsersethanDownloadspredictive_maintenance_model.tflite                           
+ type                  tflite                                                                                 
+ c_name                predictive_maintenance_model                                                           
+ compression           low                                                                                    
+ options               allocate-inputs, allocate-outputs                                                      
+ optimization          balanced                                                                               
+ targetseries         stm32l4                                                                                
+ workspace dir         CUsersethanAppDataLocalTempmxAI_workspace16471954790290015863349125137944536    
+ output dir            CUsersethan.stm32cubemxpredictive_maintenance_model_output                        
+ model_fmt             float                                                                                  
+ model_name            predictive_maintenance_model                                                           
+ model_hash            0xe0f7a2730ad2163e34cb62e047d7b4a0                                                     
+ params #              9,605 items (13.52 KiB)                                                                
+ ------------------------------------------------------------------------------------------------------------- 
+ input 11             'serving_default_input_layer0', f32(1x7), 28 Bytes, activations                        
+ output 11            'nl_3', f32(1x5), 20 Bytes, activations                                                
+ macc                  9,872                                                                                  
+ weights (ro)          13,204 B (12.89 KiB) (1 segment)  -25,216(-65.6%) vs float model                      
+ activations (rw)      768 B (768 B) (1 segment)                                                             
+ ram (total)           768 B (768 B) = 768 + 0 + 0                                                            
+ ------------------------------------------------------------------------------------------------------------- 
+ () 'input''output' buffers can be used from the activations buffer 
+Computing AI RT datacode size (target=stm32l4).. 
+ Model name - predictive_maintenance_model 
+ ------ --------------------------------- -------------- ------------- ------- ------------------------------ 
+ m_id   layer (original)                  oshape         paramsize       macc                   connected to 
+ ------ --------------------------------- -------------- ------------- ------- ------------------------------ 
+ 0      serving_default_input_layer0 ()   [b1,c7] 
+        arith_constant ()                 [b128,c7]    8963,584 
+        arith_constant1 ()                [b128]        128512 
+        gemm_0 (FULLY_CONNECTED)          [b1,c128]                    1,024   serving_default_input_layer0 
+                                                                                               arith_constant 
+                                                                                              arith_constant1 
+        nl_0_nl (FULLY_CONNECTED)         [b1,c128]                      128                         gemm_0 
+ ------ --------------------------------- -------------- ------------- ------- ------------------------------ 
+ 1      tfl_pseudo_qconst ()              [b64,c128]   8,1928,192 
+        arith_constant2 ()                [b64]         64256 
+        gemm_1 (FULLY_CONNECTED)          [b1,c64]                     8,256                        nl_0_nl 
+                                                                                            tfl_pseudo_qconst 
+                                                                                              arith_constant2 
+        nl_1_nl (FULLY_CONNECTED)         [b1,c64]                        64                         gemm_1 
+ ------ --------------------------------- -------------- ------------- ------- ------------------------------ 
+ 2      arith_constant4 ()                [b5,c64]     3201,280 
+        arith_constant3 ()                [b5]          520 
+        gemm_2 (FULLY_CONNECTED)          [b1,c5]                        325                        nl_1_nl 
+                                                                                              arith_constant4 
+                                                                                              arith_constant3 
+ ------ --------------------------------- -------------- ------------- ------- ------------------------------ 
+ 3      nl_3 (SOFTMAX)                    [b1,c5]                         75                         gemm_2 
+ ------ --------------------------------- -------------- ------------- ------- ------------------------------ 
+ model macc=9,872 weights=13,844 activations=-- io=-- 
+ Number of operations per c-layer 
+ ------- ------ ------------------------ ------- -------------- 
+ c_id    m_id   name (type)                  #op           type 
+ ------- ------ ------------------------ ------- -------------- 
+ 0       0      gemm_0 (Dense)             1,024    smul_f32_f8 
+ 1       0      nl_0_nl (Nonlinearity)       128     op_f32_f32 
+ 2       1      gemm_1 (Dense)             8,256    smul_f32_f8 
+ 3       1      nl_1_nl (Nonlinearity)        64     op_f32_f32 
+ 4       2      gemm_2 (Dense)               325   smul_f32_f32 
+ 5       3      nl_3 (Nonlinearity)           75     op_f32_f32 
+ ------- ------ ------------------------ ------- -------------- 
+ total                                     9,872 
+ Number of operation types 
+ ---------------- ------- ----------- 
+ operation type         #           % 
+ ---------------- ------- ----------- 
+ smul_f32_f8        9,280       94.0% 
+ op_f32_f32           267        2.7% 
+ smul_f32_f32         325        3.3% 
+ Complexity report (model) 
+ ------ ------------------------------ ------------------------- ------------------------- -------- 
+ m_id   name                           c_macc                    c_rom                     c_id 
+ ------ ------------------------------ ------------------------- ------------------------- -------- 
+ 0      serving_default_input_layer0                  11.7%                 18.4%   [0, 1] 
+ 1      tfl_pseudo_qconst                84.3%     71.7%   [2, 3] 
+ 2      arith_constant4                                  3.3%                   9.8%   [4] 
+ 3      nl_3                                             0.8%                     0.0%   [5] 
+ ------ ------------------------------ ------------------------- ------------------------- -------- 
+ macc=9,872 weights=13,204 act=768 ram_io=0 
+ Requested memory size by section - stm32l4 target 
+ ------------------------------------- ------- -------- ------- ----- 
+ module                                   text   rodata    data   bss 
+ ------------------------------------- ------- -------- ------- ----- 
+ NetworkRuntime1000_CM4_GCC.a            7,012        0       0     0 
+ predictive_maintenance_model.o            548       48   1,752   148 
+ predictive_maintenance_model_data.o        48       16      88     0 
+ lib (toolchain)                          614       24       0     0 
+ ------------------------------------- ------- -------- ------- ----- 
+ RT total                              8,222       88   1,840   148 
+ ------------------------------------- ------- -------- ------- ----- 
+ weights                                     0   13,208       0     0 
+ activations                                 0        0       0   768 
+ io                                          0        0       0     0 
+ ------------------------------------- ------- -------- ------- ----- 
+ TOTAL                                   8,222   13,296   1,840   916 
+ ------------------------------------- ------- -------- ------- ----- 
+   toolchain objects (libmlibgcc) 
+  RT AI runtime objects (kernels+infrastructure) 
+  Summary - stm32l4 target 
+  --------------------------------------------------- 
+               FLASH (ro)      %   RAM (rw)       % 
+  --------------------------------------------------- 
+  RT total         10,150   43.5%      1,988   72.1% 
+  --------------------------------------------------- 
+  TOTAL            23,358              2,756 
+  --------------------------------------------------- 
+    rttotal 
+Creating txt report file CUsersethan.stm32cubemxpredictive_maintenance_model_outputpredictive_maintenance_model_analyze_report.txt 
+elapsed time (analyze) 123.795s 
+Model file      predictive_maintenance_model.tflite 
+Total Flash     23354 B (22.81 KiB) 
+    Weights     13204 B (12.89 KiB) 
+    Library     10150 B (9.91 KiB) 
+Total Ram       2756 B (2.69 KiB) 
+    Activations 768 B 
+    Library     1988 B (1.94 KiB) 
+    Input       28 B (included in Activations) 
+    Output      20 B (included in Activations) 
+Done 
+Analyze complete on AI model
