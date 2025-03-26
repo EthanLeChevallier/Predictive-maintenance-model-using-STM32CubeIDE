@@ -12,7 +12,7 @@ Ce projet suit les étapes classiques d’un cycle de développement en IA embar
 ## 🗃️ Données utilisées – AI4I 2020 Dataset
 Le fichier `ai4i2020.csv` est un jeu de données de maintenance prédictive composé de 10 000 échantillons simulant le fonctionnement d’équipements industriels. Il inclut :
 
-- Des **données numériques continues** représentant des paramètres de fonctionnement :
+- Des **données numériques** représentant des paramètres de fonctionnement :
   - `Air temperature [K]`
   - `Process temperature [K]`
   - `Rotational speed [rpm]`
@@ -34,11 +34,11 @@ Le dataset ne contient pas directement de colonne multiclasse indiquant le type 
 ## 🔍 Étape 1 – Analyse et préparation du jeu de données
 
 ### 1.1 Problème de déséquilibre massif
-Dès les premières explorations, nous avons constaté un **déséquilibre massif** dans le dataset : la très grande majorité des échantillons sont étiquetés "No Failure" (absence de panne).
+Dès les premières explorations, nous avons constaté un **déséquilibre** dans le dataset : la très grande majorité des échantillons sont étiquetés "No Failure" (absence de panne).
 
 Ce déséquilibre rendait impossible l’entraînement direct d’un modèle pertinent. En effet, un modèle naïf pouvait facilement obtenir plus de 95% de précision simplement en prédisant "pas de panne" tout le temps.
 
-Ce comportement est trompeur, car s’il permet de prédire correctement l’absence de panne, il échoue à identifier précisément le **type** de panne en cas de défaillance — ce qui constitue l’objectif réel du projet.
+Ce comportement est trompeur, car s’il permet de prédire correctement l’absence de panne, il échoue à identifier précisément le **type** de panne en cas de défaillance — ce qui constitue l’objectif réel de notre projet.
 
 ### 1.2 Nettoyage et filtrage
 Pour créer une cible fiable utilisable en classification, nous avons construit une nouvelle colonne `Failure Type`, à partir des 5 colonnes binaires.
@@ -47,7 +47,7 @@ Afin d’éviter toute ambiguïté, nous avons filtré le dataset pour ne conser
 - Les lignes où **aucune panne n’est présente** (toutes les colonnes TWF à RNF sont à 0), annotées comme "No Failure" ;
 - Les lignes où **exactement une seule panne** est active (ex : TWF = 1 et toutes les autres à 0).
 
-Certaines lignes comportaient plusieurs pannes simultanément (ex : TWF = 1 et RNF = 1). Ces cas sont trop peu nombreux pour permettre un apprentissage multi-label efficace, et trop ambigus pour être traités en classification simple. Elles ont donc été exclues.
+Certaines lignes comportaient plusieurs pannes simultanément (ex : TWF = 1 et RNF = 1). Ces cas sont trop peu nombreux pour permettre un apprentissage multi-label efficace, et trop ambigus pour être traités en classification simple. Elles ont donc été exclues de l'entraînement.
 
 Ce nettoyage nous a permis d’obtenir un jeu de données propre, avec une cible unique par échantillon, pour un apprentissage **multi-classes à 6 labels** :
 `No Failure`, `TWF`, `HDF`, `PWF`, `OSF`, `RNF`.
@@ -61,7 +61,7 @@ Nous avons initialement envisagé une approche **multi-label**, dans laquelle le
   - Seuils d’activation à calibrer pour chaque sortie
   - Adaptation de l’architecture embarquée pour interpréter plusieurs sorties actives simultanément
 
-Dans le contexte d’un projet embarqué sur STM32, cela aurait considérablement complexifié le déploiement et la vérification des résultats. Nous avons donc opté pour une classification **multi-classes classique**, plus simple, plus robuste, et surtout **mieux adaptée aux contraintes d’un microcontrôleur**.
+Dans le contexte d’un projet embarqué sur STM32, cela aurait considérablement complexifié le déploiement et la vérification des résultats. Nous avons donc opté pour une classification **multi-classes classique**, plus simple et surtout **mieux adaptée aux contraintes d’un microcontrôleur**.
 
 ## 🌲 Étape 2 – Choix du modèle et architecture
 
@@ -71,7 +71,7 @@ Nous avons choisi d’utiliser un **réseau de neurones dense (MLP)** plutôt qu
 - Capacité des réseaux de neurones à capturer des relations non linéaires dans les données industrielles continues
 - Meilleure **portabilité** et contrôle de la taille mémoire par rapport à d’autres modèles plus lourds
 
-Ce choix est également cohérent avec les exemples fournis dans les projets de classification embarquée comme MNIST sur STM32 que nous avons déjà implémenté au préalable.
+Ce choix est également cohérent avec les exemples fournis dans les projets de classification embarquée comme MNIST sur STM32 que nous avons déjà implémenté au préalable comme exercice de préparation pour ce projet.
 
 ### 2.2 Architecture du réseau retenue
 Le modèle final utilisé est un réseau de neurones à 3 couches entièrement connectées :
@@ -90,6 +90,7 @@ Ce modèle est défini dans le notebook `predictive_maintenance_model.ipynb` ave
 Plutôt que de recourir à une recherche d’hyperparamètres automatisée (grid search), nous avons mené des **tests manuels successifs**. À chaque itération, nous avons évalué le modèle à l’aide de :
 - **La matrice de confusion** complète sur les 6 classes
 - **Le rapport de classification** (`precision`, `recall`, `f1-score` par classe)
+- **Accuracy globale** visualisation de la loss et d'accuracy
 
 Ces outils nous ont permis d’identifier l’architecture la plus équilibrée entre performance globale et bonne détection des classes rares (comme RNF).
 
@@ -108,13 +109,13 @@ SMOTE permet de générer artificiellement de nouveaux exemples pour les classes
 Nous avons fait le choix d’utiliser uniquement SMOTE, sans tester d’autres alternatives comme les poids de classes ou le RandomUnderSampler. Bien que cela aurait pu être pertinent pour comparaison, notre priorité était d’obtenir rapidement un jeu de données équilibré pour valider l’apprentissage embarqué.
 
 ### Application dans le pipeline
-D’après l’analyse du code, le rééquilibrage par SMOTE est effectué **avant le split train/test**, ce qui peut introduire un risque de **data leakage** (les points synthétiques pouvant influencer les deux ensembles).
+Dans notre code, le rééquilibrage par SMOTE est effectué **avant le split train/test**, ce qui peut introduire un risque de **data leakage** (les points synthétiques pouvant influencer les deux ensembles).
 
-Une amélioration possible serait d’appliquer SMOTE **uniquement sur l’ensemble d’entraînement** après découpage, afin de préserver l’indépendance de la phase de test. Cela n’a toutefois pas semblé altérer la qualité des résultats dans notre cas, comme en témoigne la bonne généralisation observée sur les prédictions STM32.
+Une amélioration possible serait d’appliquer SMOTE **uniquement sur l’ensemble d’entraînement** après découpage, afin de préserver l’indépendance de la phase de test. Malheureusement nous n'avons pas réussi à faire autrement. Cela n’a toutefois pas semblé altérer la qualité des résultats dans notre cas, comme en témoigne la bonne généralisation observée sur les prédictions STM32. 
 
 ## 🎯 Étape 4 – Évaluation du modèle
 
-L’évaluation de notre modèle ne s’est pas limitée à une simple mesure d’accuracy. Nous avons mis en place un protocole plus complet, fondé sur des outils d’analyse fine de la performance :
+L’évaluation de notre modèle ne s’est pas limitée à une simple mesure d’accuracy. Nous avons mis en place un protocole plus large, fondé sur des outils d’analyse de la performance :
 
 ### 4.1 Métriques utilisées
 
@@ -223,9 +224,9 @@ Ce projet a permis de mettre en œuvre l’ensemble de la chaîne de développem
 
 Nous avons dû faire face à des contraintes concrètes : déséquilibre des classes, limitations matérielles, conversion du modèle, communication série. Chacune a été traitée par des choix techniques appropriés, justifiés par les contraintes du déploiement embarqué.
 
-Le modèle entraîné est léger, précis, et opérationnel sur STM32. La démonstration de bout en bout valide la faisabilité d’intégrer un algorithme de classification complexe dans un microcontrôleur à ressources limitées.
+Le modèle entraîné est précis, et opérationnel sur STM32. La démonstration de bout en bout valide la faisabilité d’intégrer un algorithme de classification complexe dans un microcontrôleur à ressources limitées.
 
-Ce projet constitue une base solide pour des applications réelles de maintenance prédictive dans un environnement industriel connecté (IIoT).
+Ce projet constitue une base pour des applications réelles de maintenance prédictive dans un environnement industriel connecté (IIoT).
 
 ## 💧 Comment exécuter le projet
 
